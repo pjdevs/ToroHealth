@@ -18,13 +18,16 @@
   "entrypoints": {
     "main": [
       "net.torocraft.torohealth.ToroHealth"
+    ],
+    "modmenu": [
+      "net.torocraft.torohealth.ToroHealthModMenu"
     ]
   },
   "mixins": [
     "torohealth.mixins.json"
   ],
-  "suggests": {
-    "modmenu": "*"
+  "recommends": {
+    "modmenu": ">=3.0.0"
   },
   "depends": {
     "fabricloader": ">=0.11.3",
