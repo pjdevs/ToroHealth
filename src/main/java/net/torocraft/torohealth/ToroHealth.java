@@ -17,7 +17,8 @@ public class ToroHealth implements ModInitializer {
   public static RayTrace RAYTRACE = new RayTrace();
   public static boolean IS_HOLDING_WEAPON = false;
   public static Random RAND = new Random();
-  public static ConfigLoader<Config> CONFIG_LOADER = new ConfigLoader<>(new Config(),
+
+  private static ConfigLoader<Config> CONFIG_LOADER = new ConfigLoader<>(new Config(),
       ToroHealth.MODID + ".json", config -> ToroHealth.CONFIG = config);
 
   @Override

@@ -10,7 +10,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.TranslatableText;
 import net.torocraft.torohealth.ToroHealth;
-import net.torocraft.torohealth.config.ToroHealthConfig;
+import net.torocraft.torohealth.config.Config;
+import net.torocraft.torohealth.config.ConfigOptions;
 
 import java.util.List;
 
@@ -18,20 +19,24 @@ public class ToroHealthOptionsScreen extends GameOptionsScreen {
 
 	private Screen previous;
 	private ButtonListWidget list;
+	private Config config;
+	private ConfigOptions options;
 
 	@SuppressWarnings("resource")
 	public ToroHealthOptionsScreen(Screen previous) {
 		super(previous, MinecraftClient.getInstance().options, new TranslatableText("config.title"));
 		this.previous = previous;
+		this.config = ToroHealth.CONFIG;
+		this.options = new ConfigOptions(config);
 	}
 	
 
 	protected void init() {
 		this.list = new ButtonListWidget(this.client, this.width, this.height, 32, this.height - 32, 25);
-		this.list.addAll(ToroHealthConfig.asOptions());
+		this.list.addAll(options.asOptions(config));
 		this.addSelectableChild(this.list);
 		this.addDrawableChild(new ButtonWidget(this.width / 2 - 100, this.height - 27, 200, 20, ScreenTexts.DONE, (button) -> {
-			ToroHealth.CONFIG_LOADER.save(ToroHealth.CONFIG);
+			options.save();
 			this.client.setScreen(this.previous);
 		}));
 	}	
@@ -48,6 +53,6 @@ public class ToroHealthOptionsScreen extends GameOptionsScreen {
 	}
 
 	public void removed() {
-		
+		// Juste cancel changes
 	}
 }
